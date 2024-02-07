@@ -1,0 +1,38 @@
+version: "1.0"
+subscription:
+  subscription_id: bMVxN8vAWk
+  alias: saml-demo
+  ref: saml-dmo
+  application_type: drupal
+package:
+  exclude:
+  - .git
+  - private
+  - docroot/sites/default/files
+tasks:
+  deploy:
+    - command: drush cache-rebuild
+    - command: drush updb -y
+    - command: drush config-import -y
+    - command: drush cache-rebuild
+  scheduled:
+    - schedule: '*/15 * * * *'
+      command: drush cron
+static_cache:
+  - path: 'sites/default/files/*'
+    cache_control: 'public, max-age=3600'
+  - path: '\.(?:css|js|avi|bin|bmp|svg|dmg|doc|docx|dpkg|exe|flv|gif|htm|html|ico|ics|img|jpeg|jpg|m2a|m2v|mov|mp3|mp4|mpeg|mpg|msi|pdf|pkg|png|ppt|pptx|ps|rar|rss|rtf|swf|tif|tiff|txt|wmv|xhtml|xls|xml|zip)$'
+    cache_control: 'public, max-age=3600'
+environments:
+  - dev:
+    static_cache:
+      - path: 'sites/default/files/*'
+        cache_control: 'public, max-age=600'
+      - path: '\.(?:css|js|avi|bin|bmp|svg|dmg|doc|docx|dpkg|exe|flv|gif|htm|html|ico|ics|img|jpeg|jpg|m2a|m2v|mov|mp3|mp4|mpeg|mpg|msi|pdf|pkg|png|ppt|pptx|ps|rar|rss|rtf|swf|tif|tiff|txt|wmv|xhtml|xls|xml|zip)$'
+        cache_control: 'public, max-age=600'
+  - stage:
+    static_cache:
+      - path: 'sites/default/files/*'
+        cache_control: 'public, max-age=600'
+      - path: '\.(?:css|js|avi|bin|bmp|svg|dmg|doc|docx|dpkg|exe|flv|gif|htm|html|ico|ics|img|jpeg|jpg|m2a|m2v|mov|mp3|mp4|mpeg|mpg|msi|pdf|pkg|png|ppt|pptx|ps|rar|rss|rtf|swf|tif|tiff|txt|wmv|xhtml|xls|xml|zip)$'
+        cache_control: 'public, max-age=600'

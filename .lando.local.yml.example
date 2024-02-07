@@ -1,0 +1,11 @@
+services:
+  appserver:
+    overrides:
+      environment:
+        SAML_AZURE_TENANT_ID: 'insert-azure-tenant-id-here'
+        SAML_X509_CERTIFICATE: 'insert/certificate/here'
+        SIMPLESAMLPHP_CONFIG_DIR: /app/saml/config
+proxy:
+  appserver_nginx:
+    - saml-demo.lndo.site
+    - change-this-to-your-actual-sso-domain.lndo.site

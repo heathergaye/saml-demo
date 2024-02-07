@@ -1,0 +1,39 @@
+name: saml-demo
+recipe: drupal10
+config:
+  webroot: web
+  config:
+    php: .lando/php.ini
+    database: .lando/my.cnf
+    vhosts: .lando/nginx-override.conf
+proxy:
+  mailhog:
+    - mail-saml-demo.lndo.site
+services:
+  appserver:
+    overrides:
+      environment:
+        APP_ENV: 'local'
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver
+tooling:
+  npm:
+    service: node
+  node:
+    service: node
+  gulp:
+    service: node
+  yarn:
+    service: node
+  redis-cli:
+    service: redis
+  drush:
+    service: appserver
+    cmd: /app/vendor/drush/drush/drush
+    env:
+      DRUSH_OPTIONS_URI: "https://saml-demo.lndo.site"
+  composer:
+    cmd: /usr/local/bin/composer
