@@ -1257,7 +1257,7 @@ $config['technicalcontact_email'] = "CHANGE-THIS@technocrat.com.au";
 $config['secretsalt'] = 'CHANGE-THIS-q_?Md-BN2sfgwa0vY#2h0tCD_+6_riWl4mx2Jwd_=X';
 $config['auth.adminpassword'] = 'CHANGE-THIS-Ex#X:@QkO03W2PP';
 
-// You shouldn't need to change any of this.
+// TBH I'm not sure what this does, but neither of these folders exist on my working copy.
 $config['certdir'] = '/app/config/tls/client';
 $config['loggingdir'] = '/app/logs/';
 
